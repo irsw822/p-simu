@@ -1,0 +1,42 @@
+/*▼ここにスマホ用のスタイルをコーディングする*/
+
+body{
+  margin:3rem;
+}
+
+button_push{
+  width: 15%;
+  height: 30%;
+  position: relative;
+  text-decoration: none;
+  color: #1d1d1d;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 50px;
+  border: 1px solid #1d1d1d;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  background-color: #fff;
+  font-weight: bold;
+  transition: transform .2s;
+  &:active{
+   transform: scale(.95);
+  }
+}
+
+/*▲ここにスマホ用のスタイルをコーディングする*/
+@media screen and (min-width:600px) {
+/*▼ここにタブレット用のスタイルをコーディングする*/
+
+/*▲ここにタブレット用のスタイルをコーディングする*/
+}
+@media screen and (min-width:1024px) {
+/*▼ここにPC用のスタイルをコーディングする*/
+
+/*▲ここにPC用のスタイルをコーディングする*/ 
+}
+@media screen and (min-width:1400px) {
+/*▼ここに大画面PC用のスタイルをコーディングする*/
+
+/*▲ここに大画面PC用のスタイルをコーディングする*/ 
+}
