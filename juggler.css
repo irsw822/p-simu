@@ -19,7 +19,7 @@ button_push{
   border: 1px solid #1d1d1d;
   background-color: #fff;
   font-weight: bold;
-  transition: transform .2s;
+  transition: transform .05s;
   &:active{
    transform: scale(.90);
   }
