@@ -3,6 +3,7 @@
 body{
   width: 90vw;
   height: 90vh;
+  touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
