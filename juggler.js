@@ -1,5 +1,7 @@
 let status = "NONE";
 let result = "NONE";
+btn = document.getElementById('id_button');
+txt = document.getElementById('id_text');
 
 function setResult() {
 	result = "NONE";
@@ -16,9 +18,6 @@ function setResult() {
 		result = "NONE";
 	}
 }
-
-btn = document.getElementById('id_button');
-txt = document.getElementById('id_text');
 
 btn.addEventListener('pointerdown', () => {
 	btn.classList.add('pressed');
