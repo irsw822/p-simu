@@ -1,6 +1,6 @@
 let status = "NONE";
 let result = "NONE";
-
+let audio_gako = new Audio('mp3/dageki6.mp3');
 
 function setResult() {
 	result = "NONE";
@@ -20,7 +20,11 @@ function setResult() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-		
+	audio_gako.preload = 'auto';
+	audio_gako.addEventListener('canplaythrough', () => {
+		console.log('音声ファイルのプリロードが完了しました');
+	});
+	
 	btn = document.getElementById('id_button');
 	txt = document.getElementById('id_text');
 		
@@ -50,7 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		btn.classList.remove('pressed');
 		if (status === "PUSHED3") {
 			if ((result === "BIG") || (result === "REG")) {
-				//console.log("ガコッ！");    
+				//console.log("ガコッ！");  
+				audio_gako.play();
 				alert("ガコッ！");
 			} else if (result === "BUDO") {
 				//console.log("ぶどうget");    
