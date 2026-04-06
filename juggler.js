@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       } else if (result === "REPLAY") {
         playAudioBuffer(audioBuffers.replay);
         d_result.textContent = "リプレイget";
+      }else {
+        d_result.textContent = "はずれ";
       }
     } else {
       playAudioBuffer(audioBuffers.bet);
