@@ -12,19 +12,40 @@ div{
 }
 .div_title{
   background-color: #D7EEFF;
-  height: 10vh;
+  height: 5vh;
 }
 .div_description{
   background-color: #D9E5FF;
-  height: 10vh;
+  height: 5vh;
 }
 .div_logo{
   background-color: #D7EEFF;
-  height: 15vh;
+  height: 25vh;
 }
-.div_other{
+.div_main{
   background-color: #D9E5FF;
-  height: 40vh;
+  height: 25vh;
+  margin-bottom: 3vh;
+}
+.div_main{
+  background-color: #D9E5FF;
+  height: 25vh;
+  margin-bottom: 3vh;
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;
+}
+.div_lamp {
+  background-color: lightcoral;
+  margin: 5vw;
+  width: 20vw;
+  height: 20vw;
+}
+.div_result {
+  background-color: lightcoral;
+  width: 40vw;
+  height: 40vw;
+  margin-bottom: 5vw;
 }
 
 .button_push{
