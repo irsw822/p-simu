@@ -5,6 +5,7 @@ let d_status;
 let d_result;
 let audioContext;
 let audioBuffers = {};
+let imageCache = {};
 
 const imageFiles = {
   question: 'png/question.png',
