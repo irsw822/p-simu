@@ -57,11 +57,16 @@ function setResult() {
 
 document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const btn = document.getElementById('id_button');
+  const txt = document.getElementById('id_text');
+
+  // ここでボタンはdisabledのまま
+  btn.disabled = true;
 
   await preloadAllAudio();
 
-  const btn = document.getElementById('id_button');
-  const txt = document.getElementById('id_text');
+  // すべての音声ファイルのプリロードが完了したらボタンを有効化
+  btn.disabled = false;
 
   btn.addEventListener('pointerdown', () => {
     btn.classList.add('pressed');
