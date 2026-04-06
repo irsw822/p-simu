@@ -58,7 +58,7 @@ function setResult() {
 document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const btn = document.getElementById('id_button');
-  const txt = document.getElementById('id_status');
+  const d_status = document.getElementById('id_status');
   const d_result = document.getElementById('id_result');
 
   // ここでボタンはdisabledのまま
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       status = "BET";
       console.log("BETしました");
     }
-    txt.textContent = status;
+    d_status.textContent = status;
   });
 
   btn.addEventListener('pointerup', () => {
