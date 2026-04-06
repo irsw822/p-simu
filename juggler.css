@@ -28,7 +28,7 @@ div{
   margin-bottom: 3vh;
 }
 .div_main{
-  background-color: #D9E5FF;
+  border: 2px solid #D9E5FF;
   height: 25vh;
   margin-bottom: 3vh;
   display: flex;
@@ -36,7 +36,6 @@ div{
   align-items: flex-end;
 }
 .div_lamp {
-  background-color: lightcoral;
   margin: 5vw;
   width: 20vw;
   height: 20vw;
