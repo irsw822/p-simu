@@ -80,31 +80,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   d_status = document.getElementById('id_status');
   d_result = document.getElementById('id_result');
 
-  // ここでボタンはdisabledのまま
+  // 素材読み込みを行うためボタンはdisabledのまま
   btn.disabled = true;
 
+  await preloadAllImages();
   await preloadAllAudio();
 
-  const heroElement = document.getElementById('hero-background');
-            const imageUrl = '/images/hero-background.webp'; // プリロードしたい画像のURL
-
-            // Imageオブジェクトを作成して画像を読み込ませる
-            const img = new Image();
-            img.src = imageUrl;
-
-            img.onload = () => {
-                // 画像の読み込みが完了したら、背景画像を設定し、表示クラスを追加
-                heroElement.style.backgroundImage = `url('${imageUrl}')`;
-                heroElement.classList.add('loaded');
-                console.log('背景画像のロードが完了しました。');
-            };
-
-            img.onerror = () => {
-                console.error('背景画像のロードに失敗しました。');
-                // エラー時のフォールバック処理
-            };
-
-  // すべての音声ファイルのプリロードが完了したらボタンを有効化
+  // 全素材のプリロードが完了したらボタンを有効化
   btn.disabled = false;
 
   btn.addEventListener('pointerdown', () => {
