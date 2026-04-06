@@ -3,6 +3,7 @@ let result = "NONE";
 let btn;
 let d_status;
 let d_result;
+let d_lamp;
 let audioContext;
 let audioBuffers = {};
 let imageCache = {};
@@ -14,6 +15,8 @@ const imageFiles = {
   budo: 'png/budo.png',
   big: 'png/big.png',
   reg: 'png/reg.png',  
+  lamp_off: 'png/lamp_off.png',  
+  lamp_on: 'png/lamp_on.png',  
 };
 
 const audioFiles = {
@@ -89,6 +92,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   btn = document.getElementById('id_button');
   d_status = document.getElementById('id_status');
   d_result = document.getElementById('id_result');
+  d_lamp = document.getElementById('id_lamp');
 
   // 素材読み込みを行うためボタンはdisabledのまま
   btn.disabled = true;
@@ -147,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     btn.classList.remove('pressed');
     if (status === "PUSHED3") {
       if ((result === "BIG") || (result === "REG")) {
-        d_result.src = imageCache.big.src;
+        d_lamp.src = imageCache.lamp_on.src;
         playAudioBuffer(audioBuffers.gako);
       }
     }
