@@ -21,8 +21,8 @@ const imageFiles = {
 
 const audioFiles = {
   bet: 'mp3/bet.mp3',
-  start: 'mp3/start.mp3',
-  stop: 'mp3/stop.mp3',
+  start: 'mp3/1_start.mp3',
+  stop: 'mp3/1_stop.mp3',
   replay: 'mp3/replay.mp3',
   budo: 'mp3/budo.mp3',
   gako: 'mp3/gako.mp3',
