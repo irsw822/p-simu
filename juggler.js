@@ -58,7 +58,8 @@ function setResult() {
 document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const btn = document.getElementById('id_button');
-  const txt = document.getElementById('id_text');
+  const txt = document.getElementById('id_status');
+  const result = document.getElementById('id_result');
 
   // ここでボタンはdisabledのまま
   btn.disabled = true;
