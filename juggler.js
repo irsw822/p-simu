@@ -25,7 +25,7 @@ const audioFiles = {
   stop: 'mp3/1_stop.mp3',
   replay: 'mp3/replay.mp3',
   budo: 'mp3/budo.mp3',
-  gako: 'mp3/gako.mp3',
+  gako: 'mp3/1_gako.mp3',
 };
 
 function preloadImage(url) {
