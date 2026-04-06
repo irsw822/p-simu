@@ -2,19 +2,35 @@ let status = "NONE";
 let result = "NONE";
 let btn;
 let d_status;
+let d_result;
+let audioContext;
+let audioBuffers = {};
 
+const imageFiles = {
+  question: 'png/question.png',
+  cross: 'images/cross.png',
+  replay: 'images/replay.png',
+  budo: 'images/budo.png',
+  big: 'images/big.png',
+  reg: 'images/reg.png',  
+};
 
 const audioFiles = {
-  gako: 'mp3/gako.mp3',
   bet: 'mp3/bet.mp3',
   start: 'mp3/start.mp3',
   stop: 'mp3/stop.mp3',
   replay: 'mp3/replay.mp3',
   budo: 'mp3/budo.mp3',
+  gako: 'mp3/gako.mp3',
 };
 
-let audioContext;
-let audioBuffers = {};
+async function preloadAllImages() {
+  const keys = Object.keys(imageFiles);
+  for (const key of keys) {
+    imageCache[key] = await preloadImage(imageFiles[key]);
+    console.log(`${key} の画像プリロード完了`);
+  }
+}
 
 async function loadAudioBuffer(url) {
   const response = await fetch(url);
@@ -62,11 +78,31 @@ document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   btn = document.getElementById('id_button');
   d_status = document.getElementById('id_status');
+  d_result = document.getElementById('id_result');
 
   // ここでボタンはdisabledのまま
   btn.disabled = true;
 
   await preloadAllAudio();
+
+  const heroElement = document.getElementById('hero-background');
+            const imageUrl = '/images/hero-background.webp'; // プリロードしたい画像のURL
+
+            // Imageオブジェクトを作成して画像を読み込ませる
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = () => {
+                // 画像の読み込みが完了したら、背景画像を設定し、表示クラスを追加
+                heroElement.style.backgroundImage = `url('${imageUrl}')`;
+                heroElement.classList.add('loaded');
+                console.log('背景画像のロードが完了しました。');
+            };
+
+            img.onerror = () => {
+                console.error('背景画像のロードに失敗しました。');
+                // エラー時のフォールバック処理
+            };
 
   // すべての音声ファイルのプリロードが完了したらボタンを有効化
   btn.disabled = false;
@@ -83,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       playAudioBuffer(audioBuffers.start);
       status = "STARTED";
       console.log("スタートします");
+      d_result.src = imageCache.question.src;
       setResult();
     } else if (status === "STARTED") {
       playAudioBuffer(audioBuffers.stop);
@@ -98,10 +135,13 @@ document.addEventListener('DOMContentLoaded', async function () {
       console.log("ボタン3をpushしました");
 
       if (result === "BUDO") {
+        d_result.src = imageCache.budo.src;
         playAudioBuffer(audioBuffers.budo);
       } else if (result === "REPLAY") {
+        d_result.src = imageCache.replay.src;
         playAudioBuffer(audioBuffers.replay);
       }else {
+        d_result.src = imageCache.cross.src;
       }
     } else {
       playAudioBuffer(audioBuffers.bet);
@@ -115,6 +155,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     btn.classList.remove('pressed');
     if (status === "PUSHED3") {
       if ((result === "BIG") || (result === "REG")) {
+        d_result.src = imageCache.big.src;
         playAudioBuffer(audioBuffers.gako);
       }
     }
