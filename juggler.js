@@ -25,6 +25,15 @@ const audioFiles = {
   gako: 'mp3/gako.mp3',
 };
 
+function preloadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
 async function preloadAllImages() {
   const keys = Object.keys(imageFiles);
   for (const key of keys) {
