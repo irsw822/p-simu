@@ -9,11 +9,11 @@ let imageCache = {};
 
 const imageFiles = {
   question: 'png/question.png',
-  cross: 'images/cross.png',
-  replay: 'images/replay.png',
-  budo: 'images/budo.png',
-  big: 'images/big.png',
-  reg: 'images/reg.png',  
+  cross: 'png/cross.png',
+  replay: 'png/replay.png',
+  budo: 'png/budo.png',
+  big: 'png/big.png',
+  reg: 'png/reg.png',  
 };
 
 const audioFiles = {
