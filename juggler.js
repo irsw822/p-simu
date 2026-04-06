@@ -1,5 +1,8 @@
 let status = "NONE";
 let result = "NONE";
+let btn;
+let d_statu;
+let d_result;
 
 const audioFiles = {
   gako: 'mp3/gako.mp3',
@@ -57,9 +60,9 @@ function setResult() {
 
 document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const btn = document.getElementById('id_button');
-  const d_status = document.getElementById('id_status');
-  const d_result = document.getElementById('id_result');
+  btn = document.getElementById('id_button');
+  d_status = document.getElementById('id_status');
+  d_result = document.getElementById('id_result');
 
   // ここでボタンはdisabledのまま
   btn.disabled = true;
