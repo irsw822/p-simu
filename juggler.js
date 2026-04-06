@@ -1,118 +1,121 @@
 let status = "NONE";
 let result = "NONE";
-let audio_gako = new Audio('mp3/gako.mp3');
-let audio_bet = new Audio('mp3/bet.mp3');
-let audio_start = new Audio('mp3/start.mp3');
-let audio_stop = new Audio('mp3/stop.mp3');
-let audio_replay = new Audio('mp3/replay.mp3');
-let audio_budo = new Audio('mp3/budo.mp3');
 
-function setResult() {
-	result = "NONE";
-	num = Math.floor(Math.random() * 100);
-	if (num < 5) {
-		result = "BIG";
-	} else if (num < 10) {
-		result = "REG";
-	} else if (num < 25) {
-		result = "BUDO";
-	} else if (num < 40) {
-		result = "REPLAY";
-	} else {
-		result = "NONE";
-	}
+const audioFiles = {
+  gako: 'mp3/gako.mp3',
+  bet: 'mp3/bet.mp3',
+  start: 'mp3/start.mp3',
+  stop: 'mp3/stop.mp3',
+  replay: 'mp3/replay.mp3',
+  budo: 'mp3/budo.mp3',
+};
+
+let audioContext;
+let audioBuffers = {};
+
+async function loadAudioBuffer(url) {
+  const response = await fetch(url);
+  const arrayBuffer = await response.arrayBuffer();
+  return await audioContext.decodeAudioData(arrayBuffer);
 }
 
+async function preloadAllAudio() {
+  const keys = Object.keys(audioFiles);
+  for (const key of keys) {
+    audioBuffers[key] = await loadAudioBuffer(audioFiles[key]);
+    console.log(`${key} の音声ファイルのプリロードが完了しました`);
+  }
+}
 
-document.addEventListener('DOMContentLoaded', function () {
-	audio_bet.preload = 'auto';
-	audio_bet.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
+function playAudioBuffer(buffer) {
+  if (!buffer) {
+    console.warn('AudioBufferがありません');
+    return;
+  }
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioContext.destination);
+  source.start(0);
+  return source;
+}
 
-	audio_start.preload = 'auto';
-	audio_start.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
+function setResult() {
+  result = "NONE";
+  const num = Math.floor(Math.random() * 100);
+  if (num < 5) {
+    result = "BIG";
+  } else if (num < 10) {
+    result = "REG";
+  } else if (num < 25) {
+    result = "BUDO";
+  } else if (num < 40) {
+    result = "REPLAY";
+  } else {
+    result = "NONE";
+  }
+}
 
-	audio_stop.preload = 'auto';
-	audio_stop.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
-	
-	audio_gako.preload = 'auto';
-	audio_gako.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
+document.addEventListener('DOMContentLoaded', async function () {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
+  await preloadAllAudio();
 
-	audio_budo.preload = 'auto';
-	audio_budo.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
+  const btn = document.getElementById('id_button');
+  const txt = document.getElementById('id_text');
 
-	audio_replay.preload = 'auto';
-	audio_replay.addEventListener('canplaythrough', () => {
-		console.log('音声ファイルのプリロードが完了しました');
-	});
+  btn.addEventListener('pointerdown', () => {
+    btn.classList.add('pressed');
 
-	
-	btn = document.getElementById('id_button');
-	txt = document.getElementById('id_text');
-		
-	btn.addEventListener('pointerdown', () => {
-		btn.classList.add('pressed');
-		if (status === "BET") {
-			audio_start.play();
-			status = "STARTED"
-			console.log("スタートします");
-			setResult();
-		} else if (status === "STARTED") {
-			audio_stop.play();
-			status = "PUSHED1"
-			console.log("ボタン1をpushしました");
-		} else if (status === "PUSHED1") {
-			audio_stop.play();
-			status = "PUSHED2"
-			console.log("ボタン2をpushしました");
-		} else if (status === "PUSHED2") {
-			audio_stop.play();
-			status = "PUSHED3"
-			console.log("ボタン3をpushしました");
+    // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
 
-			if (result === "BUDO") {
-				//console.log("ぶどうget");
-				audio_budo.play();
-				alert("ぶどうget");
-			} else if (result === "REPLAY") {
-				//console.log("リプレイget");    
-				audio_replay.play();
-				alert("リプレイget");
-			}
+    if (status === "BET") {
+      playAudioBuffer(audioBuffers.start);
+      status = "STARTED";
+      console.log("スタートします");
+      setResult();
+    } else if (status === "STARTED") {
+      playAudioBuffer(audioBuffers.stop);
+      status = "PUSHED1";
+      console.log("ボタン1をpushしました");
+    } else if (status === "PUSHED1") {
+      playAudioBuffer(audioBuffers.stop);
+      status = "PUSHED2";
+      console.log("ボタン2をpushしました");
+    } else if (status === "PUSHED2") {
+      playAudioBuffer(audioBuffers.stop);
+      status = "PUSHED3";
+      console.log("ボタン3をpushしました");
 
-			
-		} else {
-			audio_bet.play();
-			status = "BET"
-			console.log("BETしました");
-		}
-		txt.textContent = status;
-	});
-	
-	btn.addEventListener('pointerup', () => {
-		btn.classList.remove('pressed');
-		if (status === "PUSHED3") {
-			if ((result === "BIG") || (result === "REG")) {
-				//console.log("ガコッ！");  
-				audio_gako.play();
-				alert("ガコッ！");
-			}
-		}
-	});
-	
-	btn.addEventListener('pointercancel', () => {
-		btn.classList.remove('pressed');
-		console.log('pointercancel イベント発生');
-	});
+      if (result === "BUDO") {
+        playAudioBuffer(audioBuffers.budo);
+        alert("ぶどうget");
+      } else if (result === "REPLAY") {
+        playAudioBuffer(audioBuffers.replay);
+        alert("リプレイget");
+      }
+    } else {
+      playAudioBuffer(audioBuffers.bet);
+      status = "BET";
+      console.log("BETしました");
+    }
+    txt.textContent = status;
+  });
 
+  btn.addEventListener('pointerup', () => {
+    btn.classList.remove('pressed');
+    if (status === "PUSHED3") {
+      if ((result === "BIG") || (result === "REG")) {
+        playAudioBuffer(audioBuffers.gako);
+        alert("ガコッ！");
+      }
+    }
+  });
+
+  btn.addEventListener('pointercancel', () => {
+    btn.classList.remove('pressed');
+    console.log('pointercancel イベント発生');
+  });
 });
