@@ -27,7 +27,7 @@ div{
   height: 40vh;
 }
 
-button_push{
+.button_push{
   width: 30%;
   height: 10vh;
   display: flex;
@@ -39,7 +39,8 @@ button_push{
   background-color: #fff;
   font-weight: bold;
   /* transition: transform .05s; */
-  &:active{
-   transform: scale(.80);
-  }
+}
+
+.button_push.pressed {
+  transform: scale(0.8);
 }
