@@ -148,13 +148,22 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
   btn.addEventListener('pointerup', () => {
-    btn.classList.remove('pressed');
     if (status === "PUSHED3") {
       if ((result === "BIG") || (result === "REG")) {
         d_lamp.src = imageCache.lamp_on.src;
         playAudioBuffer(audioBuffers.gako);
       }
     }
+
+    button.disabled = true;                
+    console.log('ボタンは無効化されました');
+
+    // 2秒（2000ミリ秒）後に無効化を解除
+    setTimeout(function() {                
+        button.disabled = false;
+        btn.classList.remove('pressed');
+        console.log('ボタンは有効化されました');
+    }, 500); // ここで時間を調整
   });
 
   btn.addEventListener('pointercancel', () => {
