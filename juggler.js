@@ -155,12 +155,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     }
 
-    button.disabled = true;                
+    btn.disabled = true;                
     console.log('ボタンは無効化されました');
 
     // 2秒（2000ミリ秒）後に無効化を解除
     setTimeout(function() {                
-        button.disabled = false;
+        btn.disabled = false;
         btn.classList.remove('pressed');
         console.log('ボタンは有効化されました');
     }, 500); // ここで時間を調整
