@@ -1,8 +1,8 @@
 let status = "NONE";
 let result = "NONE";
 let btn;
-let d_statu;
-let d_result;
+let d_status;
+
 
 const audioFiles = {
   gako: 'mp3/gako.mp3',
@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   btn = document.getElementById('id_button');
   d_status = document.getElementById('id_status');
-  d_result = document.getElementById('id_result');
 
   // ここでボタンはdisabledのまま
   btn.disabled = true;
@@ -85,7 +84,6 @@ document.addEventListener('DOMContentLoaded', async function () {
       status = "STARTED";
       console.log("スタートします");
       setResult();
-      d_result.textContent = "？";
     } else if (status === "STARTED") {
       playAudioBuffer(audioBuffers.stop);
       status = "PUSHED1";
@@ -101,12 +99,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       if (result === "BUDO") {
         playAudioBuffer(audioBuffers.budo);
-        d_result.textContent = "ぶどうget";
       } else if (result === "REPLAY") {
         playAudioBuffer(audioBuffers.replay);
-        d_result.textContent = "リプレイget";
       }else {
-        d_result.textContent = "はずれ";
       }
     } else {
       playAudioBuffer(audioBuffers.bet);
@@ -121,7 +116,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (status === "PUSHED3") {
       if ((result === "BIG") || (result === "REG")) {
         playAudioBuffer(audioBuffers.gako);
-        d_result.textContent = "GOGO！  :"+result;
       }
     }
   });
