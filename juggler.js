@@ -113,8 +113,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
 			// resume処理を成功させるため、少し待機してからresumeする
-			await new Promise(resolve => setTimeout(resolve, 200));
-			await audioContext.resume();
+//			await new Promise(resolve => setTimeout(resolve, 200));
+			audioContext.resume();
+			const start = performance.now();
+			while (context.state !== 'running' && performance.now() - start < 1000) {
+			  await new Promise(r => setTimeout(r, 10));
+			}
 			console.log('AudioContext resumed');
 //			alert("初回のタップ");
 		}
