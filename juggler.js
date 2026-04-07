@@ -8,6 +8,17 @@ let audioContext;
 let audioBuffers = {};
 let imageCache = {};
 
+const imageFiles_honban = {
+  question: 'png/question.png',
+  cross: 'png/cross.png',
+  replay: 'png/replay.png',
+  budo: 'png/budo.png',
+  big: 'png/big.png',
+  reg: 'png/reg.png',  
+  lamp_off: 'png/lamp_off.png',  
+  lamp_on: 'png/lamp_on.png',  
+};
+
 const imageFiles = {
   question: 'png/question.png',
   cross: 'png/cross.png',
@@ -100,12 +111,17 @@ document.addEventListener('DOMContentLoaded', async function () {
   await preloadAllImages();
   await preloadAllAudio();
 
+
+  
   // 全素材のプリロードが完了したらボタンを有効化
   btn.disabled = false;
 
   btn.addEventListener('pointerdown', () => {
     btn.classList.add('pressed');
 
+
+    console.log(audioContext.state);
+    
     // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
     if (audioContext.state === 'suspended') {
       audioContext.resume();
