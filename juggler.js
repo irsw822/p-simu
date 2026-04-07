@@ -143,14 +143,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
 
-			if ((result === "BIG") && isBonusGAME ) {
+			if ((result === "BIG") && isBonusGame ) {
 				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big);
-				isBonusGAME = false;
-			} else if ((result === "REG") && isBonusGAME ) {
+				isBonusGame = false;
+			} else if ((result === "REG") && isBonusGame ) {
 				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg);
-				isBonusGAME = false;				
+				isBonusGame = false;				
 			} else if (result === "BUDO") {
 				d_result.src = imageCache.budo.src;
 				playAudioBuffer(audioBuffers.budo);
