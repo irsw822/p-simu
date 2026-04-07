@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 	// 素材読み込みを行うためボタンはdisabledのまま
 	btn.disabled = true;
+	btn.style.pointerEvents = 'none';
 
 	await preloadAllImages();
 	await preloadAllAudio();
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 	// 全素材のプリロードが完了したらボタンを有効化
 	btn.disabled = false;
+	btn.style.pointerEvents = 'auto';
 
 	btn.addEventListener('pointerdown', async() => {
 		btn.classList.add('pressed');
