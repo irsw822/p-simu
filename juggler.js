@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			if ((result === "BIG") || (result === "REG")) {
 				// Bonusゲームフラグが立っていないなら確定処理
 				if(!isBonusGame){
+					alert("確定処理");
 					playAudioBuffer(audioBuffers.gako);
 					d_lamp.src = imageCache.lamp_on.src;
 					isBonusGame = true;
