@@ -81,7 +81,7 @@ function setResult() {
 		d_result.src = imageCache.question.src;
 		d_lamp.src = imageCache.lamp_off.src;
 		const num = Math.floor(Math.random() * 100);
-		if (num < 5) {
+		if (num < 40) {
 			result = "BIG";
 		} else if (num < 10) {
 			result = "REG";
@@ -148,10 +148,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big);
 				isBonusGame = false;
+				alert("bo終了処理: "+isBonusGame);
 			} else if ((result === "REG") && isBonusGame ) {
 				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg);
-				isBonusGame = false;				
+				isBonusGame = false;
+				alert("bo終了処理: "+isBonusGame);
 			} else if (result === "BUDO") {
 				d_result.src = imageCache.budo.src;
 				playAudioBuffer(audioBuffers.budo);
@@ -175,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			if ((result === "BIG") || (result === "REG")) {
 				// Bonusゲームフラグが立っていないなら確定処理
 				if(!isBonusGame){
-					alert("確定処理");
+					alert("確定処理: "+isBonusGame);
 					playAudioBuffer(audioBuffers.gako);
 					d_lamp.src = imageCache.lamp_on.src;
 					isBonusGame = true;
