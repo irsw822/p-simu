@@ -109,14 +109,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerdown', async() => {
 		btn.classList.add('pressed');
 
-		
-
 		console.log(audioContext.state);
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
-			await new Promise(resolve => setTimeout(resolve, 200)); // 待つ
+			// resume処理を成功させるため、少し待機してからresumeする
+			await new Promise(resolve => setTimeout(resolve, 200));
 			await audioContext.resume();
-//			await new Promise(resolve => setTimeout(resolve, 2000)); // 待つ
 			console.log('AudioContext resumed');
 			alert("初回のタップ");
 		}
