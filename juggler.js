@@ -118,9 +118,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     console.log(audioContext.state);
 
-  　alert("AudioContext state before play: "+audioContext.state);
-
-    if (status === "BET") {
+  　if (status === "BET") {
       playAudioBuffer(audioBuffers.start);
       status = "STARTED";
       console.log("スタートします");
@@ -149,6 +147,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         d_result.src = imageCache.cross.src;
       }
     } else {
+      alert("AudioContext state before play: "+audioContext.state);
       playAudioBuffer(audioBuffers.bet);
       status = "BET";
       console.log("BETしました");
