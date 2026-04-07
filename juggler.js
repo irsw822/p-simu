@@ -7,6 +7,7 @@ let d_lamp;
 let audioContext;
 let audioBuffers = {};
 let imageCache = {};
+let isBonusGame = false;
 
 const imageFiles = {
 	question: 'png/question.png',
@@ -72,18 +73,20 @@ function playAudioBuffer(buffer) {
 }
 
 function setResult() {
-	result = "NONE";
-	const num = Math.floor(Math.random() * 100);
-	if (num < 5) {
-		result = "BIG";
-	} else if (num < 10) {
-		result = "REG";
-	} else if (num < 25) {
-		result = "BUDO";
-	} else if (num < 40) {
-		result = "REPLAY";
-	} else {
+	if( !isBonusGame ){
 		result = "NONE";
+		const num = Math.floor(Math.random() * 100);
+		if (num < 5) {
+			result = "BIG";
+		} else if (num < 10) {
+			result = "REG";
+		} else if (num < 25) {
+			result = "BUDO";
+		} else if (num < 40) {
+			result = "REPLAY";
+		} else {
+			result = "NONE";
+		}
 	}
 }
 
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.disabled = false;
 	btn.style.pointerEvents = 'auto';
 
+	// ボタンを押した時の処理
 	btn.addEventListener('pointerdown', async() => {
 		btn.classList.add('pressed');
 
@@ -119,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			console.log('AudioContext resumed');
 		}
 		console.log(audioContext.state);
-		
+
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start);
 			status = "STARTED";
@@ -139,7 +143,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
 
-			if (result === "BUDO") {
+			if ((result === "BIG") && isBonusGAME ) {
+				d_result.src = imageCache.big.src;
+				playAudioBuffer(audioBuffers.big);
+				isBonusGAME = false;
+			if ((result === "REG") && isBonusGAME ) {
+				d_result.src = imageCache.reg.src;
+				playAudioBuffer(audioBuffers.reg);
+				isBonusGAME = false;				
+			} else if (result === "BUDO") {
 				d_result.src = imageCache.budo.src;
 				playAudioBuffer(audioBuffers.budo);
 			} else if (result === "REPLAY") {
@@ -149,7 +161,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.cross.src;
 			}
 		} else {
-//			alert("AudioContext state before play: " + audioContext.state);
 			playAudioBuffer(audioBuffers.bet);
 			status = "BET";
 			console.log("BETしました");
@@ -157,16 +168,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 		d_status.textContent = status;
 	});
 
+	// ボタンを離した時の処理
 	btn.addEventListener('pointerup', () => {
 		if (status === "PUSHED3") {
 			if ((result === "BIG") || (result === "REG")) {
-				d_lamp.src = imageCache.lamp_on.src;
 				playAudioBuffer(audioBuffers.gako);
+				d_lamp.src = imageCache.lamp_on.src;
+				isBonusGame = true;
 			}
 		}
 
 		// 少しのあいだボタンを無効化しておく処理
-
 		btn.classList.remove('pressed');
 		btn.disabled = true;
 		btn.style.pointerEvents = 'none';
@@ -176,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			btn.disabled = false;
 			btn.style.pointerEvents = 'auto';
 			console.log('ボタンは有効化されました');
-		}, 250); // 無効時間はここで調整(ミリ秒)
+		}, 200); // 無効時間はここで調整(ミリ秒)
 	});
 
 	btn.addEventListener('pointercancel', () => {
