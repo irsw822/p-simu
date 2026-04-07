@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big);
 				isBonusGAME = false;
-			if ((result === "REG") && isBonusGAME ) {
+			} else if ((result === "REG") && isBonusGAME ) {
 				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg);
 				isBonusGAME = false;				
