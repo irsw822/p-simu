@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			await new Promise(resolve => setTimeout(resolve, 200));
 			await audioContext.resume();
 			console.log('AudioContext resumed');
-			alert("初回のタップ");
+//			alert("初回のタップ");
 		}
 		console.log(audioContext.state);
 
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.cross.src;
 			}
 		} else {
-			alert("AudioContext state before play: " + audioContext.state);
+//			alert("AudioContext state before play: " + audioContext.state);
 			playAudioBuffer(audioBuffers.bet);
 			status = "BET";
 			console.log("BETしました");
