@@ -110,10 +110,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   await preloadAllImages();
   await preloadAllAudio();
-      // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
-    if (audioContext.state === 'suspended') {
-      await audioContext.resume();
-    }
+
 
 
   
@@ -125,7 +122,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
     console.log(audioContext.state);
-    
+          // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
 
 
     if (status === "BET") {
