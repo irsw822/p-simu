@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
 			audioContext.resume();
-			await new Promise(resolve => setTimeout(resolve, 100)); // 100ms待つ
+			await new Promise(resolve => setTimeout(resolve, 500)); // 100ms待つ
 			console.log('AudioContext resumed');
 		}
 		console.log(audioContext.state);
