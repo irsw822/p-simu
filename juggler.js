@@ -1,4 +1,4 @@
-let status = "NONE";
+let status = "BET";
 let result = "NONE";
 let btn;
 let d_status;
