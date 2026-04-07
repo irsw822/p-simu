@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		if (audioContext.state === 'suspended') {
 //			await new Promise(resolve => setTimeout(resolve, 1000)); // 待つ
 			audioContext.resume();
-			await new Promise(resolve => setTimeout(resolve, 1000)); // 待つ
+			await new Promise(resolve => setTimeout(resolve, 2000)); // 待つ
 			console.log('AudioContext resumed');
 			alert("初回のタップ");
 		}
