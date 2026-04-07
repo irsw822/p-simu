@@ -10,14 +10,7 @@ let imageCache = {};
 let isBonusGame = false;
 
 const imageFiles = {
-	question: 'png/_question.png',
-	cross: 'png/_cross.png',
-	replay: 'png/_replay.png',
-	budo: 'png/_budo.png',
-	big: 'png/_big.png',
-	reg: 'png/_reg.png',
-	lamp_off: 'png/_lamp_off.png',
-	lamp_on: 'png/_lamp_on.png',
+	test: 'png/question.png',
 };
 
 const imageFiles_bak = {
