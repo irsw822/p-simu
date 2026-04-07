@@ -115,10 +115,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 			audioContext.resume();
 			await new Promise(resolve => setTimeout(resolve, 500)); // 100ms待つ
 			console.log('AudioContext resumed');
+			alert("初回のタップ");
 		}
 		console.log(audioContext.state);
 
-		alert("初回のタップ");
+		
 		
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start);
