@@ -88,7 +88,7 @@ function setResult() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-	audioContext = new(window.AudioContext || window.webkitAudioContext)();
+	
 	btn = document.getElementById('id_button');
 	d_status = document.getElementById('id_status');
 	d_result = document.getElementById('id_result');
@@ -109,12 +109,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerdown', async() => {
 		btn.classList.add('pressed');
 
+		audioContext = new(window.AudioContext || window.webkitAudioContext)();
+
 		console.log(audioContext.state);
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
-//			await new Promise(resolve => setTimeout(resolve, 1000)); // 待つ
-			audioContext.resume();
-			await new Promise(resolve => setTimeout(resolve, 2000)); // 待つ
+//			await new Promise(resolve => setTimeout(resolve, 500)); // 待つ
+			await audioContext.resume();
+//			await new Promise(resolve => setTimeout(resolve, 2000)); // 待つ
 			console.log('AudioContext resumed');
 			alert("初回のタップ");
 		}
