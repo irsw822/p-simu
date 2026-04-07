@@ -172,17 +172,18 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     }
 
+    // 少しのあいだボタンを無効化しておく処理
+
     btn.classList.remove('pressed');
     btn.disabled = true;
     btn.style.pointerEvents = 'none';
     console.log('ボタンは無効化されました');
 
-    // 2秒（2000ミリ秒）後に無効化を解除
     setTimeout(function() {                
       btn.disabled = false;
       btn.style.pointerEvents = 'auto';
       console.log('ボタンは有効化されました');
-    }, 500); // ここで時間を調整
+    }, 250); // 無効時間はここで調整(ミリ秒)
   });
 
   btn.addEventListener('pointercancel', () => {
