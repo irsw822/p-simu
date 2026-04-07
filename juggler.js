@@ -139,6 +139,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.stop);
 			status = "PUSHED2";
 			console.log("ボタン2をpushしました");
+			if(isBonusGame){
+				playAudioBuffer(audioBuffers.reach);
+			}
 		} else if (status === "PUSHED2") {
 			playAudioBuffer(audioBuffers.stop);
 			status = "PUSHED3";
