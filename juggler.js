@@ -10,10 +10,6 @@ let imageCache = {};
 let isBonusGame = false;
 
 const imageFiles = {
-	test: 'png/question.png',
-};
-
-const imageFiles_bak = {
 	question: 'png/question.png',
 	cross: 'png/cross.png',
 	replay: 'png/replay.png',
@@ -79,6 +75,7 @@ function playAudioBuffer(buffer) {
 }
 
 function setResult() {
+	console.log(isBonusGame);
 	if( !isBonusGame ){
 		result = "NONE";
 		d_result.src = imageCache.question.src;
@@ -127,10 +124,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			// resume処理は前提としてボタン押下イベントを待つ必要がある。ブラウザにボタン押下イベントを確実に認識させるため少し待つ。
 			await new Promise(resolve => setTimeout(resolve, 200));
 			await audioContext.resume();
-
-			console.log('AudioContext resumed');
 		}
-		console.log(audioContext.state);
 
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start);
@@ -189,12 +183,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 		btn.classList.remove('pressed');
 		btn.disabled = true;
 		btn.style.pointerEvents = 'none';
-		console.log('ボタンは無効化されました');
 
 		setTimeout(function() {
 			btn.disabled = false;
 			btn.style.pointerEvents = 'auto';
-			console.log('ボタンは有効化されました');
 		}, 200); // 無効時間はここで調整(ミリ秒)
 	});
 
