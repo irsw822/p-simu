@@ -1,4 +1,4 @@
-let status = "BET";
+let status = "NONE";
 let result = "NONE";
 let btn;
 let d_status;
@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 		}
 		console.log(audioContext.state);
 
-		　
+		alert("初回のタップ");
+		
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start);
 			status = "STARTED";
