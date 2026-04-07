@@ -8,17 +8,6 @@ let audioContext;
 let audioBuffers = {};
 let imageCache = {};
 
-const imageFiles_honban = {
-  question: 'png/question.png',
-  cross: 'png/cross.png',
-  replay: 'png/replay.png',
-  budo: 'png/budo.png',
-  big: 'png/big.png',
-  reg: 'png/reg.png',  
-  lamp_off: 'png/lamp_off.png',  
-  lamp_on: 'png/lamp_on.png',  
-};
-
 const imageFiles = {
   question: 'png/question.png',
   cross: 'png/cross.png',
@@ -128,7 +117,9 @@ document.addEventListener('DOMContentLoaded', async function () {
       console.log('AudioContext resumed');
     }
     console.log(audioContext.state);
-   
+
+
+  　alert('AudioContext state before play:', audioContext.state);
 
     if (status === "BET") {
       playAudioBuffer(audioBuffers.start);
