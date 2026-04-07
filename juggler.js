@@ -27,6 +27,7 @@ const audioFiles = {
 	replay: 'mp3/replay.mp3',
 	budo: 'mp3/budo.mp3',
 	gako: 'mp3/1_gako.mp3',
+	reach: 'mp3/reach.mp3',
 	big: 'mp3/big.mp3',
 	reg: 'mp3/reg.mp3',
 };
@@ -75,15 +76,14 @@ function playAudioBuffer(buffer) {
 }
 
 function setResult() {
-	console.log(isBonusGame);
 	if( !isBonusGame ){
 		result = "NONE";
 		d_result.src = imageCache.question.src;
 		d_lamp.src = imageCache.lamp_off.src;
 		const num = Math.floor(Math.random() * 100);
-		if (num < 40) {
+		if (num < 5) {
 			result = "BIG";
-		} else if (num < 10) {
+		} else if (num < 40) {
 			result = "REG";
 		} else if (num < 25) {
 			result = "BUDO";
