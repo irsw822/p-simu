@@ -151,12 +151,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big);
 				isBonusGame = false;
-				alert("bo終了処理: "+isBonusGame);
+				result = "NONE";
 			} else if ((result === "REG") && isBonusGame ) {
 				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg);
 				isBonusGame = false;
-				alert("bo終了処理: "+isBonusGame);
+				result = "NONE";
 			} else if (result === "BUDO") {
 				d_result.src = imageCache.budo.src;
 				playAudioBuffer(audioBuffers.budo);
@@ -178,13 +178,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerup', () => {
 		if (status === "PUSHED3") {
 			if ((result === "BIG") || (result === "REG")) {
-				// Bonusゲームフラグが立っていないなら確定処理
-				if(!isBonusGame){
-					alert("確定処理: "+isBonusGame);
-					playAudioBuffer(audioBuffers.gako);
-					d_lamp.src = imageCache.lamp_on.src;
-					isBonusGame = true;
-				}
+				playAudioBuffer(audioBuffers.gako);
+				d_lamp.src = imageCache.lamp_on.src;
+				isBonusGame = true;
 			}
 		}
 
