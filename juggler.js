@@ -173,9 +173,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerup', () => {
 		if (status === "PUSHED3") {
 			if ((result === "BIG") || (result === "REG")) {
-				playAudioBuffer(audioBuffers.gako);
-				d_lamp.src = imageCache.lamp_on.src;
-				isBonusGame = true;
+				// Bonusゲームフラグが立っていないなら確定処理
+				if(!isBonusGame){
+					playAudioBuffer(audioBuffers.gako);
+					d_lamp.src = imageCache.lamp_on.src;
+					isBonusGame = true;
+				}
 			}
 		}
 
