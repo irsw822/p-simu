@@ -77,6 +77,8 @@ function playAudioBuffer(buffer) {
 function setResult() {
 	if( !isBonusGame ){
 		result = "NONE";
+		d_result.src = imageCache.question.src;
+		d_lamp.src = imageCache.lamp_off.src;
 		const num = Math.floor(Math.random() * 100);
 		if (num < 5) {
 			result = "BIG";
@@ -130,7 +132,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.start);
 			status = "STARTED";
 			console.log("スタートします");
-			d_result.src = imageCache.question.src;
 			setResult();
 		} else if (status === "STARTED") {
 			playAudioBuffer(audioBuffers.stop);
