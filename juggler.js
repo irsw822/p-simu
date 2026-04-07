@@ -118,8 +118,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     console.log(audioContext.state);
 
-
-  　alert('AudioContext state before play:', audioContext.state);
+  　alert("AudioContext state before play: "+audioContext.state);
 
     if (status === "BET") {
       playAudioBuffer(audioBuffers.start);
