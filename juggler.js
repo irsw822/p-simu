@@ -10,14 +10,25 @@ let imageCache = {};
 let isBonusGame = false;
 
 const imageFiles = {
-//	question: 'png/question.png',
-//	cross: 'png/cross.png',
-//	replay: 'png/replay.png',
-//	budo: 'png/budo.png',
-//	big: 'png/big.png',
-//	reg: 'png/reg.png',
-//	lamp_off: 'png/lamp_off.png',
-//	lamp_on: 'png/lamp_on.png',
+	question: 'png/_question.png',
+	cross: 'png/_cross.png',
+	replay: 'png/_replay.png',
+	budo: 'png/_budo.png',
+	big: 'png/_big.png',
+	reg: 'png/_reg.png',
+	lamp_off: 'png/_lamp_off.png',
+	lamp_on: 'png/_lamp_on.png',
+};
+
+const imageFiles_bak = {
+	question: 'png/question.png',
+	cross: 'png/cross.png',
+	replay: 'png/replay.png',
+	budo: 'png/budo.png',
+	big: 'png/big.png',
+	reg: 'png/reg.png',
+	lamp_off: 'png/lamp_off.png',
+	lamp_on: 'png/lamp_on.png',
 };
 
 const audioFiles = {
