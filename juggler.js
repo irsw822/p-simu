@@ -106,15 +106,14 @@ document.addEventListener('DOMContentLoaded', async function () {
   // 全素材のプリロードが完了したらボタンを有効化
   btn.disabled = false;
 
-  btn.addEventListener('pointerdown', async () => {
+  btn.addEventListener('pointerdown',  () => {
     btn.classList.add('pressed');
 
 
     console.log(audioContext.state);
           // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
     if (audioContext.state === 'suspended') {
-      await audioContext.resume();
-      await new Promise(resolve => setTimeout(resolve, 100)); // 100ms待つ
+      audioContext.resume();
       console.log('AudioContext resumed');
     }
     console.log(audioContext.state);
