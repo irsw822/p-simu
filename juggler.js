@@ -83,7 +83,7 @@ function setResult() {
 		const num = Math.floor(Math.random() * 100);
 		if (num < 5) {
 			result = "BIG";
-		} else if (num < 40) {
+		} else if (num < 10) {
 			result = "REG";
 		} else if (num < 25) {
 			result = "BUDO";
