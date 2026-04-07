@@ -156,13 +156,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     btn.classList.remove('pressed');
-    btn.disabled = true;                
+    btn.disabled = true;
+    btn.style.pointerEvents = 'none';
     console.log('ボタンは無効化されました');
 
     // 2秒（2000ミリ秒）後に無効化を解除
     setTimeout(function() {                
-        btn.disabled = false;
-        console.log('ボタンは有効化されました');
+      btn.disabled = false;
+      btn.style.pointerEvents = 'auto';
+      console.log('ボタンは有効化されました');
     }, 500); // ここで時間を調整
   });
 
