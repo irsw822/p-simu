@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', async function () {
           // AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
     if (audioContext.state === 'suspended') {
       await audioContext.resume();
+      console.log('AudioContext resumed');
     }
-
+    console.log(audioContext.state);
+   
 
     if (status === "BET") {
       playAudioBuffer(audioBuffers.start);
