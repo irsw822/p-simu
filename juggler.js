@@ -41,7 +41,7 @@ async function preloadAllImages() {
 	const keys = Object.keys(imageFiles);
 	for (const key of keys) {
 		imageCache[key] = await preloadImage(imageFiles[key]);
-		console.log(`${key} の画像プリロード完了`);
+		//console.log(`${key} の画像プリロード完了`);
 	}
 }
 
@@ -55,7 +55,7 @@ async function preloadAllAudio() {
 	const keys = Object.keys(audioFiles);
 	for (const key of keys) {
 		audioBuffers[key] = await loadAudioBuffer(audioFiles[key]);
-		console.log(`${key} の音声ファイルのプリロードが完了しました`);
+		//console.log(`${key} の音声ファイルのプリロードが完了しました`);
 	}
 }
 
@@ -98,9 +98,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.disabled = true;
 	btn.style.pointerEvents = 'none';
 
+	// 素材のプリロード
 	await preloadAllImages();
 	await preloadAllAudio();
-
+	console.log("素材のプリロード完了");
 
 	// 全素材のプリロードが完了したらボタンを有効化
 	btn.disabled = false;
@@ -109,22 +110,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerdown', async() => {
 		btn.classList.add('pressed');
 
-		console.log(audioContext.state);
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
-			// resume処理を成功させるため、少し待機してからresumeする
-//			await new Promise(resolve => setTimeout(resolve, 200));
-			audioContext.resume();
-			const start = performance.now();
-			while (context.state !== 'running' && performance.now() - start < 1000) {
-			  await new Promise(r => setTimeout(r, 10));
-			}
+			// resume処理は前提としてボタン押下イベントを待つ必要がある。ブラウザにボタン押下イベントを確実に認識させるため少し待つ。
+			await new Promise(resolve => setTimeout(resolve, 200));
+			await audioContext.resume();
+
 			console.log('AudioContext resumed');
-//			alert("初回のタップ");
 		}
 		console.log(audioContext.state);
-
-		
 		
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start);
