@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   // 全素材のプリロードが完了したらボタンを有効化
   btn.disabled = false;
 
-  btn.addEventListener('pointerdown', () => {
+  btn.addEventListener('pointerdown', async () => {
     btn.classList.add('pressed');
 
 
