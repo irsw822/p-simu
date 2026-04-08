@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		// AudioContextはユーザー操作があるまでサスペンドされていることがあるのでresumeする
 		if (audioContext.state === 'suspended') {
 			// resume処理は前提としてボタン押下イベントを待つ必要がある。ブラウザにボタン押下イベントを確実に認識させるため少し待つ。
-			await new Promise(resolve => setTimeout(resolve, 200));
+			await new Promise(resolve => setTimeout(resolve, 100));
 			await audioContext.resume();
 		}
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		setTimeout(function() {
 			btn.disabled = false;
 			btn.style.pointerEvents = 'auto';
-		}, 200); // 無効時間はここで調整(ミリ秒)
+		}, 150); // 無効時間はここで調整(ミリ秒)
 	});
 
 	btn.addEventListener('pointercancel', () => {
