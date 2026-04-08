@@ -124,6 +124,9 @@ function setResult() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+
+	const loadingDiv = document.getElementById('loading');
+	
 	audioContext = new(window.AudioContext || window.webkitAudioContext)();
 	btn = document.getElementById('id_button');
 	d_status = document.getElementById('id_status');
@@ -139,6 +142,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 	await preloadAllAudio();
 	console.log("素材のプリロード完了");
 
+	// 読み込み中表示を消す
+  	loadingDiv.style.display = 'none';
+	
 	// 全素材のプリロードが完了したらボタンを有効化
 	btn.disabled = false;
 	btn.style.pointerEvents = 'auto';
