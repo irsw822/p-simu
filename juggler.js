@@ -8,6 +8,8 @@ let audioContext;
 let audioBuffers = {};
 let imageCache = {};
 let isBonusGame = false;
+let currentAudioSource = null;
+let currentAudioKey = null;  // どの音声を再生中かを記録
 
 const imageFiles = {
 	question: 'png/question.png',
@@ -62,7 +64,7 @@ async function preloadAllAudio() {
 		//console.log(`${key} の音声ファイルのプリロードが完了しました`);
 	}
 }
-
+/*
 function playAudioBuffer(buffer) {
 	if (!buffer) {
 		console.warn('AudioBufferがありません');
@@ -72,6 +74,32 @@ function playAudioBuffer(buffer) {
 	source.buffer = buffer;
 	source.connect(audioContext.destination);
 	source.start(0);
+	return source;
+}
+*/
+
+// 音声再生の途中終了対応版
+function playAudioBuffer(buffer, key) {
+	if (!buffer) {
+		console.warn('AudioBufferがありません');
+		return null;
+	}
+	const source = audioContext.createBufferSource();
+	source.buffer = buffer;
+	source.connect(audioContext.destination);
+	source.start(0);
+
+	// 再生終了時にcurrentAudioSourceをクリア
+	source.onended = () => {
+		if (currentAudioSource === source) {
+			currentAudioSource = null;
+			currentAudioKey = null;
+		}
+	};
+
+	currentAudioSource = source;
+	currentAudioKey = key;
+
 	return source;
 }
 
@@ -126,48 +154,56 @@ document.addEventListener('DOMContentLoaded', async function() {
 			await audioContext.resume();
 		}
 
+		// Bonus音がなっている場合、強制停止停止する。
+		if (( currentAudioKey === 'playngBig' && currentAudioSource) || ( currentAudioKey === 'playngReg' && currentAudioSource )) {
+			currentAudioSource.stop();
+			currentAudioSource = null;
+			currentAudioKey = null;
+			console.log('Bonus音の再生を停止しました');
+		}
+
 		if (status === "BET") {
-			playAudioBuffer(audioBuffers.start);
+			playAudioBuffer(audioBuffers.start, 'playngStart');
 			status = "STARTED";
 			console.log("スタートします");
 			setResult();
 		} else if (status === "STARTED") {
-			playAudioBuffer(audioBuffers.stop);
+			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED1";
 			console.log("ボタン1をpushしました");
 		} else if (status === "PUSHED1") {
-			playAudioBuffer(audioBuffers.stop);
+			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED2";
 			console.log("ボタン2をpushしました");
 			if(isBonusGame){
-				playAudioBuffer(audioBuffers.reach);
+				playAudioBuffer(audioBuffers.reach, 'playngReach');
 			}
 		} else if (status === "PUSHED2") {
-			playAudioBuffer(audioBuffers.stop);
+			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
 
 			if ((result === "BIG") && isBonusGame ) {
 				d_result.src = imageCache.big.src;
-				playAudioBuffer(audioBuffers.big);
+				playAudioBuffer(audioBuffers.big, 'playngBig');
 				isBonusGame = false;
 				result = "NONE";
 			} else if ((result === "REG") && isBonusGame ) {
 				d_result.src = imageCache.reg.src;
-				playAudioBuffer(audioBuffers.reg);
+				playAudioBuffer(audioBuffers.reg, 'playngReg');
 				isBonusGame = false;
 				result = "NONE";
 			} else if (result === "BUDO") {
 				d_result.src = imageCache.budo.src;
-				playAudioBuffer(audioBuffers.budo);
+				playAudioBuffer(audioBuffers.budo, 'playngBudo');
 			} else if (result === "REPLAY") {
 				d_result.src = imageCache.replay.src;
-				playAudioBuffer(audioBuffers.replay);
+				playAudioBuffer(audioBuffers.replay, 'playngReplay');
 			} else {
 				d_result.src = imageCache.cross.src;
 			}
 		} else {
-			playAudioBuffer(audioBuffers.bet);
+			playAudioBuffer(audioBuffers.bet, 'playngBet');
 			status = "BET";
 			console.log("BETしました");
 		}
@@ -178,18 +214,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 	btn.addEventListener('pointerup', () => {
 		if (status === "PUSHED3") {
 			if ((result === "BIG") || (result === "REG")) {
-				playAudioBuffer(audioBuffers.gako);
+				playAudioBuffer(audioBuffers.gako, 'playngGako');
 				d_lamp.src = imageCache.lamp_on.src;
 				isBonusGame = true;
 			}
 		}
 
-		// 少しのあいだボタンを無効化しておく処理
-		btn.classList.remove('pressed');
+		// 連打を避けるために一瞬ボタンを無効化しておく処理
 		btn.disabled = true;
 		btn.style.pointerEvents = 'none';
-
 		setTimeout(function() {
+			btn.classList.remove('pressed');
 			btn.disabled = false;
 			btn.style.pointerEvents = 'auto';
 		}, 150); // 無効時間はここで調整(ミリ秒)
