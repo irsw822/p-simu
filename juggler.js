@@ -40,6 +40,18 @@ const imagePatternLose = [
 	["budo", "budo", "replay"],
 	["budo", "budo", "big"],
 	["budo", "budo", "reg"],
+	["replay", "replay", "budo"],
+	["replay", "replay", "big"],
+	["replay", "replay", "reg"],
+	["budo", "replay", "budo"],
+	["budo", "replay", "replay"],
+	["budo", "replay", "big"],
+	["budo", "replay", "reg"],
+	["replay", "budo", "budo"],
+	["replay", "budo", "replay"],
+	["replay", "budo", "big"],
+	["replay", "budo", "reg"],
+
 ];
 
 function preloadImage(url) {
