@@ -7,7 +7,8 @@ let d_lamp;
 let audioContext;
 let audioBuffers = {};
 let imageCache = {};
-let isBonusGame = false;
+let isBigBonus = false;
+let isRegularBonus = false;
 let currentAudioSource = null;
 let currentAudioKey = null;  // どの音声を再生中かを記録
 let imagePattern;
@@ -113,10 +114,21 @@ function playAudioBuffer(buffer, key) {
 function setResult() {
 	d_result.src = imageCache.question.src;
 
-	// Bonusゲーム中であれば初期化しつつ抽選を行う。
-	if( !isBonusGame ){
+	// ★リールパターンを回転中に設定
+
+	// Bonus確定状態とそれ以外で抽選処理を変える
+	if( isBigBonus ){
+		imagePattern = ["big", "big", "big"];
+	} else if ( isRegularBonus )
+		imagePattern = ["big", "big", "big"];	
+	} else {
 		result = "NONE";
 		d_lamp.src = imageCache.lamp_off.src;
+
+		// リールパターンを初期化
+		const pattern = Math.floor(Math.random() * imagePattern.length);
+		imagePattern = imagePatternLose[pattern];
+		
 		const num = Math.floor(Math.random() * 100);
 		if (num < 5) {
 			result = "BIG";
@@ -124,13 +136,15 @@ function setResult() {
 			result = "REG";
 		} else if (num < 25) {
 			result = "BUDO";
-			imagePattern = ["budo", "budo", "budo"];
+			imagePattern = ["budo", "budo", "budo"]; // リールパターンを子役で上書き
 		} else if (num < 40) {
 			result = "REPLAY";
-			imagePattern = ["replay", "replay", "replay"];
+			imagePattern = ["replay", "replay", "replay"]; // リールパターンを子役で上書き
 		} else {
 			result = "NONE";
 		}
+
+		
 	}
 }
 
@@ -192,33 +206,31 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED2";
 			console.log("ボタン2をpushしました");
-			if(isBonusGame){
+			if(isBigBonus || isRegularBonus){
 				playAudioBuffer(audioBuffers.reach, 'playngReach');
 			}
 		} else if (status === "PUSHED2") {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
+			d_result.src = imageCache.[imagePattern[2]].src;
 
-			if ((result === "BIG") && isBonusGame ) {
+			if ( isBigBonus ) {
 				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big, 'playngBig');
-				isBonusGame = false;
+				isBigBonus = false;
 				result = "NONE";
-			} else if ((result === "REG") && isBonusGame ) {
+			} else if ( isRegularBonus ) {
 				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg, 'playngReg');
-				isBonusGame = false;
+				isRegularBonus = false;
 				result = "NONE";
 			} else if (result === "BUDO") {
-				d_result.src = imageCache.imagePattern[2].src;
 				playAudioBuffer(audioBuffers.budo, 'playngBudo');
 			} else if (result === "REPLAY") {
-				d_result.src = imageCache.imagePattern[2].src;
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
 			} else {
-//				d_result.src = imageCache.cross.src;
-				d_result.src = imageCache["cross"].src;
+				d_result.src = imageCache.cross.src;
 			}
 		} else {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
@@ -231,10 +243,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 	// ボタンを離した時の処理
 	btn.addEventListener('pointerup', () => {
 		if (status === "PUSHED3") {
-			if ((result === "BIG") || (result === "REG")) {
+			// ボーナスを引いていた場合の処理
+			if (result === "BIG") {
 				playAudioBuffer(audioBuffers.gako, 'playngGako');
 				d_lamp.src = imageCache.lamp_on.src;
-				isBonusGame = true;
+				isBigBonus = true;
+			} else if (result === "REG") {
+				playAudioBuffer(audioBuffers.gako, 'playngGako');
+				d_lamp.src = imageCache.lamp_on.src;
+				isRegularBonus = true;				
 			}
 		}
 
