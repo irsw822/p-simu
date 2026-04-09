@@ -2,7 +2,7 @@ let status = "NONE";
 let result = "NONE";
 let btn;
 let d_status;
-let d_result;
+let d_result =[];
 let d_lamp;
 let audioContext;
 let audioBuffers = {};
@@ -115,6 +115,9 @@ function setResult() {
 //	d_result.src = imageCache.question.src;
 
 	// ★リールパターンを回転中に設定
+	d_result[0].src = imageCache.question.src;
+	d_result[1].src = imageCache.question.src;
+	d_result[2].src = imageCache.question.src;
 
 	// Bonus確定状態とそれ以外で抽選処理を変える
 	if( isBigBonus ){
@@ -155,7 +158,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 	audioContext = new(window.AudioContext || window.webkitAudioContext)();
 	btn = document.getElementById('id_button');
 	d_status = document.getElementById('id_status');
-	d_result = document.getElementById('id_result');
+	d_result[0] = document.getElementById('id_result1');
+	d_result[1] = document.getElementById('id_result2');
+	d_result[2] = document.getElementById('id_result3');
 	d_lamp = document.getElementById('id_lamp');
 
 	// 素材読み込みを行うためボタンはdisabledのまま
@@ -202,10 +207,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED1";
 			console.log("ボタン1をpushしました");
+			d_result[0].src = imageCache[imagePattern[0]].src;
 		} else if (status === "PUSHED1") {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED2";
 			console.log("ボタン2をpushしました");
+			d_result[1].src = imageCache[imagePattern[1]].src;
 			if(isBigBonus || isRegularBonus){
 				playAudioBuffer(audioBuffers.reach, 'playngReach');
 			}
@@ -213,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
-			d_result.src = imageCache[imagePattern[2]].src;
+			d_result[2].src = imageCache[imagePattern[2]].src;
 
 			if ( isBigBonus ) {
 //				d_result.src = imageCache.big.src;
