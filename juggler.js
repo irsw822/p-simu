@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start, 'playngStart');
 			status = "STARTED";
+			d_status.textContent = "STARTED";
 			console.log("スタートします");
 			setResult();
 		} else if (status === "STARTED") {
@@ -225,25 +226,30 @@ document.addEventListener('DOMContentLoaded', async function() {
 //				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big, 'playngBig');
 				isBigBonus = false;
+				d_status.textContent = "Big Bonus!!";
 				result = "NONE";
 			} else if ( isRegularBonus ) {
 //				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg, 'playngReg');
 				isRegularBonus = false;
+				d_status.textContent = "Regular Bonus!";
 				result = "NONE";
 			} else if (result === "BUDO") {
 				playAudioBuffer(audioBuffers.budo, 'playngBudo');
+				d_status.textContent = "ぶどう get!";
 			} else if (result === "REPLAY") {
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
+				d_status.textContent = "REPLAY!";
 			} else {
-//				d_result.src = imageCache.cross.src;
+				d_status.textContent = "-";
 			}
 		} else {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
 			status = "BET";
 			console.log("BETしました");
+			d_status.textContent = "BET";
 		}
-		d_status.textContent = status;
+		
 	});
 
 	// ボタンを離した時の処理
