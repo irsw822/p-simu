@@ -24,7 +24,7 @@ div{
   height: 15vh;
 }
 .div_main{
-  background-color: #ff6666;
+  background-color: #cc0033;
   height: 15vh;
   display: flex;
   justify-content: center;
@@ -36,7 +36,7 @@ div{
   height: 100%;
 }
 .div_sub{
-  background-color: #D7EEFF;
+  background-color: #cc0033;
   height: 5vh;
   display: flex;
   justify-content: left;
