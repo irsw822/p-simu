@@ -65,10 +65,10 @@ img{
 }
 
 p {
-  padding-left: 70vw;
-  padding-top: 5vh;
+  padding-left: 50vw;
+  padding-top: 2vh;
   color: white;
-  font-size: 4em;
+  font-size: 3em;
 }
 
 .button_push{
@@ -78,11 +78,11 @@ p {
   justify-content: center;
   align-items: center;
   margin: auto;
-  border-radius: 50px;
+  border-radius: 100px;
   border: 1px solid #1d1d1d;
   background-color: #fff;
   font-weight: bold;
-  font-size: 4em;
+  font-size: 3em;
   /* transition: transform .05s; */
 }
 
