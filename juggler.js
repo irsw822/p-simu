@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 		if (status === "BET") {
 			playAudioBuffer(audioBuffers.start, 'playngStart');
 			status = "STARTED";
-			d_status.textContent = "STARTED";
+			d_status.textContent = "Start";
 			console.log("スタートします");
 			setResult();
 		} else if (status === "STARTED") {
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
 			status = "BET";
 			console.log("BETしました");
-			d_status.textContent = "BET";
+			d_status.textContent = "Bet";
 		}
 		
 	});
