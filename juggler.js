@@ -10,6 +10,7 @@ let imageCache = {};
 let isBonusGame = false;
 let currentAudioSource = null;
 let currentAudioKey = null;  // どの音声を再生中かを記録
+let imagePattern;
 
 const imageFiles = {
 	question: 'png/question.png',
@@ -123,8 +124,10 @@ function setResult() {
 			result = "REG";
 		} else if (num < 25) {
 			result = "BUDO";
+			imagePattern = ["budo", "budo", "budo"];
 		} else if (num < 40) {
 			result = "REPLAY";
+			imagePattern = ["replay", "replay", "replay"];
 		} else {
 			result = "NONE";
 		}
