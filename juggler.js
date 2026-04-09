@@ -34,16 +34,10 @@ const audioFiles = {
 	reg: 'mp3/reg.mp3',
 };
 
-const audioFiles = {
-	bet: 'mp3/bet.mp3',
-	start: 'mp3/1_start.mp3',
-	stop: 'mp3/1_stop.mp3',
-	replay: 'mp3/replay.mp3',
-	budo: 'mp3/budo.mp3',
-	gako: 'mp3/1_gako.mp3',
-	reach: 'mp3/reach.mp3',
-	big: 'mp3/big.mp3',
-	reg: 'mp3/reg.mp3',
+const imagePatternLose = {
+	["budo", "budo", "replay"],
+	["budo", "budo", "big"],
+	["budo", "budo", "reg"],
 };
 
 function preloadImage(url) {
