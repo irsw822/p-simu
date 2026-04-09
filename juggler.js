@@ -112,7 +112,7 @@ function playAudioBuffer(buffer, key) {
 }
 
 function setResult() {
-	d_result.src = imageCache.question.src;
+//	d_result.src = imageCache.question.src;
 
 	// ★リールパターンを回転中に設定
 
@@ -213,15 +213,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 			playAudioBuffer(audioBuffers.stop, 'playngStop');
 			status = "PUSHED3";
 			console.log("ボタン3をpushしました");
-			d_result.src = imageCache.[imagePattern[2]].src;
+			d_result.src = imageCache[imagePattern[2]].src;
 
 			if ( isBigBonus ) {
-				d_result.src = imageCache.big.src;
+//				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big, 'playngBig');
 				isBigBonus = false;
 				result = "NONE";
 			} else if ( isRegularBonus ) {
-				d_result.src = imageCache.reg.src;
+//				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg, 'playngReg');
 				isRegularBonus = false;
 				result = "NONE";
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 			} else if (result === "REPLAY") {
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
 			} else {
-				d_result.src = imageCache.cross.src;
+//				d_result.src = imageCache.cross.src;
 			}
 		} else {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
