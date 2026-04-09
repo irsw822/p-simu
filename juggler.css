@@ -19,9 +19,9 @@ div{
   background-color: #D9E5FF;
   height: 5vh;
 }
-.div_logo{
+.div_body1{
   background-color: #D7EEFF;
-  height: 25vh;
+  height: 12vh;
 }
 .div_main{
   height: 15vh;
@@ -39,7 +39,10 @@ div{
   width: 20vw;
   height: 20vw;
 }
-
+.div_body1{
+  background-color: #D7EEFF;
+  height: 12h;
+}
 
 img{
   width: 100%;
@@ -48,7 +51,7 @@ img{
 
 .button_push{
   width: 45%;
-  height: 15vh;
+  height: 12vh;
   display: flex;
   justify-content: center;
   align-items: center;
