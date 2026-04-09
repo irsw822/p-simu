@@ -34,11 +34,11 @@ const audioFiles = {
 	reg: 'mp3/reg.mp3',
 };
 
-const imagePatternLose = {
+const imagePatternLose = [
 	["budo", "budo", "replay"],
 	["budo", "budo", "big"],
 	["budo", "budo", "reg"],
-};
+];
 
 function preloadImage(url) {
 	return new Promise((resolve, reject) => {
