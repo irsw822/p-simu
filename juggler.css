@@ -74,6 +74,9 @@ p {
   color: white;
   font-size: 3em;
 }
+.p_description {
+  font-size: 2em;
+}
 
 .button_push{
   width: 40%;
