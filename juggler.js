@@ -126,7 +126,7 @@ function setResult() {
 		d_lamp.src = imageCache.lamp_off.src;
 
 		// リールパターンを初期化
-		const pattern = Math.floor(Math.random() * imagePattern.length);
+		const pattern = Math.floor(Math.random() * imagePatternLose.length);
 		imagePattern = imagePatternLose[pattern];
 		
 		const num = Math.floor(Math.random() * 100);
