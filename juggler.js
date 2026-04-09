@@ -119,7 +119,7 @@ function setResult() {
 	// Bonus確定状態とそれ以外で抽選処理を変える
 	if( isBigBonus ){
 		imagePattern = ["big", "big", "big"];
-	} else if ( isRegularBonus )
+	} else if ( isRegularBonus ) {
 		imagePattern = ["big", "big", "big"];	
 	} else {
 		result = "NONE";
