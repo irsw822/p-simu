@@ -13,12 +13,16 @@ div{
   width: 100%;
 }
 .div_title{
-  background-color: #D7EEFF;
+  display: flex;
+  justify-content: center; /* 横中央 */
+  align-items: center;     /* 縦中央 */
   height: 5vh;
 }
 .div_description{
-  background-color: #D9E5FF;
-  height: 5vh;
+  display: flex;
+  justify-content: center; /* 横中央 */
+  align-items: center;     /* 縦中央 */
+  height: 7vh;
 }
 .div_body1{
   height: 15vh;
