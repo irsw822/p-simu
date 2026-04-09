@@ -15,6 +15,9 @@ let imagePattern;
 
 const imageFiles = {
 	question: 'png/question.png',
+	roll1: 'png/roll1.png',
+	roll2: 'png/roll2.png',
+	roll3: 'png/roll3.png',
 	cross: 'png/cross.png',
 	replay: 'png/replay.png',
 	budo: 'png/budo.png',
@@ -126,10 +129,10 @@ function playAudioBuffer(buffer, key) {
 function setResult() {
 //	d_result.src = imageCache.question.src;
 
-	// ★リールパターンを回転中に設定
-	d_result[0].src = imageCache.question.src;
-	d_result[1].src = imageCache.question.src;
-	d_result[2].src = imageCache.question.src;
+	// リールパターンを回転中に設定
+	d_result[0].src = imageCache.roll1.src;
+	d_result[1].src = imageCache.roll2.src;
+	d_result[2].src = imageCache.roll3.src;
 
 	// Bonus確定状態とそれ以外で抽選処理を変える
 	if( isBigBonus ){
