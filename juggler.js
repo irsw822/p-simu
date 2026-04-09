@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 				d_result.src = imageCache.budo.src;
 				playAudioBuffer(audioBuffers.budo, 'playngBudo');
 			} else if (result === "REPLAY") {
-				d_result.src = imageCache.replay.src;
+				d_result.src = imageCache.imagePattern[].src;
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
 			} else {
 //				d_result.src = imageCache.cross.src;
