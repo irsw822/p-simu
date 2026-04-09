@@ -34,12 +34,13 @@ div{
   height: 100%;
 }
 .div_lamp {
-  margin: 2vw;
+  margin: 2vh;
   width: 20vw;
   height: 20vw;
 }
 .div_body2{
-  height: 12h;
+  margin-top: 2vh;
+  height: 12vh;
 }
 
 img{
