@@ -226,22 +226,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 //				d_result.src = imageCache.big.src;
 				playAudioBuffer(audioBuffers.big, 'playngBig');
 				isBigBonus = false;
-				d_status.textContent = "Big Bonus!!";
+				d_status.textContent = "Big Bonus!!!";
 				result = "NONE";
 			} else if ( isRegularBonus ) {
 //				d_result.src = imageCache.reg.src;
 				playAudioBuffer(audioBuffers.reg, 'playngReg');
 				isRegularBonus = false;
-				d_status.textContent = "Regular Bonus!";
+				d_status.textContent = "Regular Bonus!!";
 				result = "NONE";
 			} else if (result === "BUDO") {
 				playAudioBuffer(audioBuffers.budo, 'playngBudo');
-				d_status.textContent = "ぶどうget!";
+				d_status.textContent = "Grape!";
 			} else if (result === "REPLAY") {
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
-				d_status.textContent = "REPLAY!";
+				d_status.textContent = "Replay!";
 			} else {
-				d_status.textContent = "ー";
+				d_status.textContent = "-";
 			}
 		} else {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
