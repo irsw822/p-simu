@@ -104,9 +104,11 @@ function playAudioBuffer(buffer, key) {
 }
 
 function setResult() {
+	d_result.src = imageCache.question.src;
+
+	// Bonusゲーム中であれば初期化しつつ抽選を行う。
 	if( !isBonusGame ){
 		result = "NONE";
-		d_result.src = imageCache.question.src;
 		d_lamp.src = imageCache.lamp_off.src;
 		const num = Math.floor(Math.random() * 100);
 		if (num < 5) {
