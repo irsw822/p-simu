@@ -236,12 +236,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 				result = "NONE";
 			} else if (result === "BUDO") {
 				playAudioBuffer(audioBuffers.budo, 'playngBudo');
-				d_status.textContent = "ぶどう get!";
+				d_status.textContent = "ぶどうget!";
 			} else if (result === "REPLAY") {
 				playAudioBuffer(audioBuffers.replay, 'playngReplay');
 				d_status.textContent = "REPLAY!";
 			} else {
-				d_status.textContent = "-";
+				d_status.textContent = "ー";
 			}
 		} else {
 			playAudioBuffer(audioBuffers.bet, 'playngBet');
