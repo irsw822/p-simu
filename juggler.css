@@ -16,13 +16,13 @@ div{
   display: flex;
   justify-content: center; /* 横中央 */
   align-items: center;     /* 縦中央 */
-  height: 5vh;
+  height: 6vh;
 }
 .div_description{
   display: flex;
   justify-content: center; /* 横中央 */
   align-items: center;     /* 縦中央 */
-  height: 7vh;
+  height: 6vh;
 }
 .div_body1{
   height: 15vh;
