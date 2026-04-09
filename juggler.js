@@ -87,21 +87,7 @@ async function preloadAllAudio() {
 		//console.log(`${key} の音声ファイルのプリロードが完了しました`);
 	}
 }
-/*
-function playAudioBuffer(buffer) {
-	if (!buffer) {
-		console.warn('AudioBufferがありません');
-		return;
-	}
-	const source = audioContext.createBufferSource();
-	source.buffer = buffer;
-	source.connect(audioContext.destination);
-	source.start(0);
-	return source;
-}
-*/
 
-// 音声再生の途中終了対応版
 function playAudioBuffer(buffer, key) {
 	if (!buffer) {
 		console.warn('AudioBufferがありません');
@@ -127,9 +113,7 @@ function playAudioBuffer(buffer, key) {
 }
 
 function setResult() {
-//	d_result.src = imageCache.question.src;
-
-	// リールパターンを回転中に設定
+	// リールパターンを"回転中"に設定
 	d_result[0].src = imageCache.roll1.src;
 	d_result[1].src = imageCache.roll2.src;
 	d_result[2].src = imageCache.roll3.src;
@@ -138,7 +122,7 @@ function setResult() {
 	if( isBigBonus ){
 		imagePattern = ["big", "big", "big"];
 	} else if ( isRegularBonus ) {
-		imagePattern = ["big", "big", "big"];	
+		imagePattern = ["big", "big", "reg"];	
 	} else {
 		result = "NONE";
 		d_lamp.src = imageCache.lamp_off.src;
