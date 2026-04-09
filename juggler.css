@@ -1,4 +1,5 @@
 body{
+  background-color: black;
   width: 100%;
   height: 80vh;
   touch-action: manipulation;
@@ -23,23 +24,22 @@ div{
   height: 25vh;
 }
 .div_main{
-  border: 2px solid #D9E5FF;
-  height: 25vh;
-  margin-bottom: 3vh;
+  height: 15vh;
   display: flex;
-  justify-content: left;
-  align-items: flex-end;
+  justify-content: center;
+}
+.div_result {
+  border: 1px solid black;
+  margin: 1px;
+  width: 25vw;
+  height: 100%;
 }
 .div_lamp {
-  margin: 5vw;
+  margin: 2vw;
   width: 20vw;
   height: 20vw;
 }
-.div_result {
-  width: 40vw;
-  height: 40vw;
-  margin-bottom: 5vw;
-}
+
 
 img{
   width: 100%;
